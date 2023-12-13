@@ -2,7 +2,6 @@ package CristinaPalmisani.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -31,12 +30,13 @@ public class Evento {
 
     public Evento(){}
 
-    public Evento( String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, int numeroMaxPartecipanti) {
+    public Evento( String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, int numeroMaxPartecipanti, Location location) {
         this.titolo = titolo;
         this.dataEvento = dataEvento;
         this.descrizione = descrizione;
         this.tipoEvento = tipoEvento;
         this.numeroMaxPartecipanti = numeroMaxPartecipanti;
+        this.location = location;
     }
 
     public String getTitolo() {
