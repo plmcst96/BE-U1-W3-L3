@@ -3,6 +3,7 @@ package CristinaPalmisani.entities;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "eventi")
@@ -21,6 +22,12 @@ public class Evento {
     private TipoEvento tipoEvento;
     @Column(name = "num_max_partecipanti")
     private int numeroMaxPartecipanti;
+
+    @OneToMany(mappedBy = "evento", cascade = CascadeType.REMOVE)
+    private Set<Partecipazione> partecipazioni;
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
 
     public Evento(){}
 
@@ -70,6 +77,22 @@ public class Evento {
 
     public void setNumeroMaxPartecipanti(int numeroMaxPartecipanti) {
         this.numeroMaxPartecipanti = numeroMaxPartecipanti;
+    }
+
+    public Set<Partecipazione> getPartecipazioni() {
+        return partecipazioni;
+    }
+
+    public void setPartecipazioni(Set<Partecipazione> partecipazioni) {
+        this.partecipazioni = partecipazioni;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     @Override
