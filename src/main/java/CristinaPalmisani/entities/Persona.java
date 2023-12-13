@@ -77,10 +77,7 @@ public class Persona {
     public List<Partecipazione> getListaPartecipazione() {
         return listaPartecipazione;
     }
-
-    public void setListaPartecipazione(List<Partecipazione> listaPartecipazione) {
-        this.listaPartecipazione = listaPartecipazione;
-    }
+    
 
     @Override
     public String toString() {

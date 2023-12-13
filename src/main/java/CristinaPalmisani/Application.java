@@ -12,6 +12,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Application {
@@ -28,18 +29,23 @@ public class Application {
         Persona persona;
         Partecipazione partecipazione;
         Faker faker = new Faker();
-
+        Random rndm = new Random();
 
         for (int i = 0; i < 15; i++) {
 
             location = new Location(faker.address().cityName(), faker.address().city());
             ld.save(location);
 
-            evento = new Evento(faker.book().title(), LocalDate.of(2000, 3, 10),
-                    faker.lorem().paragraph(), faker.options().option(TipoEvento.class), faker.number().numberBetween(10, 20300), location);
+            evento = new Evento(faker.book().title(), LocalDate.of(rndm.nextInt(2023, 2026),
+                    rndm.nextInt(1, 13), rndm.nextInt(1, 29) ),
+                    faker.lorem().paragraph(), faker.options().option(TipoEvento.class),
+                    faker.number().numberBetween(10, 20300), location);
             evd.save(evento);
 
-            persona = new Persona(faker.artist().name(), faker.name().lastName(), faker.internet().emailAddress(), LocalDate.from(ZonedDateTime.now()), faker.options().option(Sesso.class));
+            persona = new Persona(faker.artist().name(), faker.name().lastName(),
+                    faker.internet().emailAddress(),LocalDate.of(rndm.nextInt(2023, 2026),
+                    rndm.nextInt(1, 13), rndm.nextInt(1, 29) ),
+                    faker.options().option(Sesso.class));
             ped.save(persona);
             partecipazione = new Partecipazione(persona, evento, faker.options().option(Stato.class));
             pd.savePartecipazione(partecipazione);
